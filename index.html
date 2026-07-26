@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05090d">
+  <meta name="description" content="All Seeing Eye ist eine Diplomarbeit zur automatisierten Analyse von Netzwerkgeräte-Konfigurationen und zur verständlichen Darstellung möglicher Sicherheitsrisiken.">
+  <meta property="og:title" content="All Seeing Eye — Network Security Analysis">
+  <meta property="og:description" content="Konfigurationen analysieren. Risiken sichtbar machen.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/ase-logo-simple.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>All Seeing Eye — Network Security Analysis</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=20260726-5">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="#top" aria-label="All Seeing Eye – Startseite">
+      <svg class="brand-mark" viewBox="0 0 982 986" aria-hidden="true" data-tracking-eye data-eye-range="1.8" data-eye-y-ratio="1">
+        <defs>
+          <filter id="header-logo-invert" color-interpolation-filters="sRGB">
+            <feColorMatrix type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0"/>
+          </filter>
+          <mask id="header-logo-shape" maskUnits="userSpaceOnUse" x="0" y="0" width="982" height="986">
+            <rect width="982" height="986" fill="#000"/>
+            <image href="assets/ase-logo-simple.jpg" x="1" y="1" width="980" height="984" preserveAspectRatio="none" filter="url(#header-logo-invert)"/>
+            <circle cx="491" cy="568" r="74" fill="#000"/>
+          </mask>
+          <mask id="header-pupil-shape" maskUnits="userSpaceOnUse" x="421" y="498" width="140" height="140">
+            <rect x="421" y="498" width="140" height="140" fill="#000"/>
+            <circle cx="491" cy="568" r="42" fill="#fff"/>
+            <circle cx="468" cy="545" r="20" fill="#000"/>
+          </mask>
+          <clipPath id="header-pupil-clip">
+            <circle cx="491" cy="568" r="73"/>
+          </clipPath>
+        </defs>
+        <rect width="982" height="986" fill="currentColor" mask="url(#header-logo-shape)"/>
+        <g class="brand-iris" data-eye-iris clip-path="url(#header-pupil-clip)">
+          <rect x="421" y="498" width="140" height="140" fill="currentColor" mask="url(#header-pupil-shape)"/>
+        </g>
+      </svg>
+      <span class="brand-name">ALL SEEING <em>EYE</em></span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Hauptnavigation">
+      <a href="#projekt">Projekt</a>
+      <a href="#system">System</a>
+      <a href="#team">Team</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <a class="header-link" href="https://github.com/ASE-All-Seeing-Eye/All-Seeing-Eye" target="_blank" rel="noreferrer">
+      GitHub
+      <span aria-hidden="true">↗</span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation" hidden>
+    <a href="#projekt"><span>01</span>Projekt</a>
+    <a href="#system"><span>02</span>System</a>
+    <a href="#team"><span>03</span>Team</a>
+    <a href="#kontakt"><span>04</span>Kontakt</a>
+  </nav>
+
+  <main id="main-content">
+    <section class="hero" id="top" aria-labelledby="hero-title" data-network-surface>
+      <canvas class="network-canvas" data-network-canvas aria-hidden="true"></canvas>
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <div class="hero-copy">
+        <div class="eyebrow hero-eyebrow">
+          <span class="status-dot" aria-hidden="true"></span>
+          Diplomarbeit · 2026/27 · In Entwicklung
+        </div>
+
+        <h1 id="hero-title">
+          <span class="hero-word motion-word" data-word="ALL" data-motion-depth=".55">ALL</span>
+          <span class="hero-word motion-word" data-word="SEEING" data-motion-depth=".8">SEEING</span>
+          <span class="hero-word motion-word accent" data-word="EYE" data-motion-depth="1.05">EYE</span>
+        </h1>
+
+        <p class="hero-statement">Netzwerke verstehen.<br>Risiken sichtbar machen.</p>
+        <p class="hero-description">
+          Ein System zur automatisierten Erfassung, Aufbereitung und
+          sicherheitsorientierten Analyse von Netzwerk-Konfigurationen.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projekt">
+            Projekt entdecken
+            <span aria-hidden="true">↓</span>
+          </a>
+          <a class="text-link" href="https://github.com/ASE-All-Seeing-Eye/All-Seeing-Eye" target="_blank" rel="noreferrer">
+            Entwicklung auf GitHub
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-hero-visual aria-hidden="true">
+        <div class="emblem-stage">
+          <svg class="simple-emblem" viewBox="0 0 982 986" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <filter id="invert-logo-mask" color-interpolation-filters="sRGB">
+                <feColorMatrix type="matrix" values="
+                  -1 0 0 0 1
+                  0 -1 0 0 1
+                  0 0 -1 0 1
+                  0 0 0 1 0
+                "/>
+              </filter>
+              <mask id="logo-shape-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="982" height="986">
+                <rect width="982" height="986" fill="#000"/>
+                <image
+                  href="assets/ase-logo-simple.jpg"
+                  x="1"
+                  y="1"
+                  width="980"
+                  height="984"
+                  preserveAspectRatio="none"
+                  filter="url(#invert-logo-mask)"
+                />
+                <circle cx="491" cy="568" r="74" fill="#000"/>
+              </mask>
+              <mask id="moving-pupil-mask" maskUnits="userSpaceOnUse" x="421" y="498" width="140" height="140">
+                <rect x="421" y="498" width="140" height="140" fill="#000"/>
+                <circle cx="491" cy="568" r="42" fill="#fff"/>
+                <circle cx="468" cy="545" r="20" fill="#000"/>
+              </mask>
+              <clipPath id="hero-pupil-clip">
+                <circle cx="491" cy="568" r="73"/>
+              </clipPath>
+            </defs>
+            <rect width="982" height="986" fill="#d9f5fa" mask="url(#logo-shape-mask)"/>
+            <g
+              class="logo-eye-tracker"
+              data-tracking-eye
+              data-eye-range="22"
+              data-eye-reference-viewport="880"
+              data-eye-y-ratio="1"
+            >
+              <circle class="logo-eye-hitarea" cx="491" cy="568" r="74"/>
+              <g class="logo-pupil" data-eye-iris clip-path="url(#hero-pupil-clip)">
+                <rect
+                  x="421"
+                  y="498"
+                  width="140"
+                  height="140"
+                  fill="#d9f5fa"
+                  mask="url(#moving-pupil-mask)"
+                />
+              </g>
+            </g>
+          </svg>
+          <canvas
+            class="logo-shine-canvas"
+            width="982"
+            height="986"
+            data-logo-shine
+            aria-hidden="true"
+          ></canvas>
+        </div>
+      </div>
+
+      <div class="hero-meta" role="group" aria-label="Projektinformationen">
+        <span>HTL Wien 3 Rennweg</span>
+        <span>Informationstechnologie</span>
+        <span>Wien · Österreich</span>
+      </div>
+    </section>
+
+    <section class="section project-intro" id="projekt" aria-labelledby="project-title">
+      <div class="section-index" data-reveal>
+        <span>01</span>
+        <span>Das Projekt</span>
+      </div>
+
+      <div class="project-intro-grid">
+        <div>
+          <p class="eyebrow" data-reveal>Security sichtbar machen</p>
+          <h2 id="project-title" data-reveal>
+            Aus komplexen Konfigurationen werden
+            <span class="accent">klare Erkenntnisse.</span>
+          </h2>
+        </div>
+
+        <div class="project-copy" data-reveal>
+          <p>
+            Unternehmensnetzwerke wachsen laufend. Mit jedem Gerät und jeder
+            Änderung wird es schwieriger, Konfigurationen manuell zu prüfen und
+            sicherheitsrelevante Abweichungen rechtzeitig zu erkennen.
+          </p>
+          <p>
+            All Seeing Eye entwickelt dafür ein Python-basiertes Werkzeug:
+            Netzwerkgeräte werden erfasst, Konfigurationen strukturiert
+            aufbereitet und mithilfe eines bestehenden Large Language Models
+            analysiert. Das Ergebnis ist ein nachvollziehbarer Bericht mit
+            priorisierten Handlungsempfehlungen.
+          </p>
+        </div>
+      </div>
+
+      <div class="project-principles" data-reveal>
+        <div>
+          <strong>Read-only</strong>
+          <span>Keine aktiven Eingriffe in Netzwerkgeräte</span>
+        </div>
+        <div>
+          <strong>Nachvollziehbar</strong>
+          <span>Befunde mit Kontext und klarer Priorisierung</span>
+        </div>
+        <div>
+          <strong>Praxisnah</strong>
+          <span>Entwickelt für reale Netzwerk-Konfigurationen</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section workflow" id="system" aria-labelledby="system-title">
+      <div class="section-index" data-reveal>
+        <span>02</span>
+        <span>Das System</span>
+      </div>
+
+      <div class="section-heading">
+        <p class="eyebrow" data-reveal>Von der Infrastruktur zum Finding</p>
+        <h2 id="system-title" data-reveal>Ein kontrollierter Analyseprozess.</h2>
+        <p data-reveal>
+          Vier klar getrennte Schritte machen den Weg von der
+          Gerätekonfiguration bis zum Bericht transparent.
+        </p>
+      </div>
+
+      <ol class="process-list">
+        <li data-reveal>
+          <span class="process-number">01</span>
+          <div>
+            <h3>Erfassen</h3>
+            <p>Autorisierte Geräte und erreichbare Assets werden erkannt. Konfigurationen werden über geeignete, lesende Schnittstellen abgerufen.</p>
+          </div>
+          <span class="process-code" aria-hidden="true">SSH / DISCOVERY</span>
+        </li>
+        <li data-reveal>
+          <span class="process-number">02</span>
+          <div>
+            <h3>Strukturieren</h3>
+            <p>Rohdaten werden geparst, vereinheitlicht und für die weitere Sicherheitsanalyse in ein konsistentes Format gebracht.</p>
+          </div>
+          <span class="process-code" aria-hidden="true">PARSE / NORMALIZE</span>
+        </li>
+        <li data-reveal>
+          <span class="process-number">03</span>
+          <div>
+            <h3>Bewerten</h3>
+            <p>Aufbereitete Konfigurationsdaten werden auf mögliche Fehlkonfigurationen und Sicherheitsrisiken untersucht.</p>
+          </div>
+          <span class="process-code" aria-hidden="true">ANALYZE / PRIORITIZE</span>
+        </li>
+        <li data-reveal>
+          <span class="process-number">04</span>
+          <div>
+            <h3>Berichten</h3>
+            <p>Ergebnisse erscheinen übersichtlich, priorisiert und mit verständlichen Empfehlungen in einem automatisierten Bericht.</p>
+          </div>
+          <span class="process-code" aria-hidden="true">REPORT / EXPLAIN</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="system-focus" aria-labelledby="focus-title">
+      <div class="focus-visual" aria-hidden="true">
+        <svg viewBox="0 0 720 720" data-topology>
+          <g class="topology-secondary-links">
+            <path d="M95 200 360 80 625 200"/>
+            <path d="M90 520 360 625 630 520"/>
+          </g>
+
+          <g class="topology-links">
+            <path data-topology-link="firewall" d="M360 360 360 80"/>
+            <path data-topology-link="router" d="M360 360 95 200"/>
+            <path data-topology-link="switch" d="M360 360 625 200"/>
+            <path data-topology-link="server" d="M360 360 90 520"/>
+            <path data-topology-link="nas" d="M360 360 360 625"/>
+            <path data-topology-link="access-point" d="M360 360 630 520"/>
+          </g>
+
+          <line
+            class="topology-scan-line"
+            data-topology-scan
+            x1="360"
+            y1="360"
+            x2="360"
+            y2="360"
+          />
+
+          <g
+            class="topology-node"
+            data-topology-node="firewall"
+            data-x="360"
+            data-y="80"
+            transform="translate(360 80)"
+          >
+            <circle class="topology-node-pulse" r="34"/>
+            <g class="topology-device-icon">
+              <rect class="device-surface" x="-22" y="-18" width="44" height="36" rx="3"/>
+              <path d="M-22-6H22M-22 6H22M-10-18v12M8-18v12M-16-6V6M4-6V6M-8 6v12M12 6v12"/>
+            </g>
+            <text class="topology-node-label" y="54" text-anchor="middle">FIREWALL</text>
+          </g>
+
+          <g
+            class="topology-node"
+            data-topology-node="router"
+            data-x="95"
+            data-y="200"
+            transform="translate(95 200)"
+          >
+            <circle class="topology-node-pulse" r="34"/>
+            <g class="topology-device-icon">
+              <path d="M-15-10v-14M15-10v-14"/>
+              <circle class="device-led" cx="-15" cy="-25" r="2.2"/>
+              <circle class="device-led" cx="15" cy="-25" r="2.2"/>
+              <rect class="device-surface" x="-25" y="-10" width="50" height="25" rx="5"/>
+              <path d="M-14 3h7M0 3h7"/>
+              <circle class="device-led" cx="16" cy="3" r="2.2"/>
+            </g>
+            <text class="topology-node-label" y="54" text-anchor="middle">ROUTER</text>
+          </g>
+
+          <g
+            class="topology-node"
+            data-topology-node="switch"
+            data-x="625"
+            data-y="200"
+            transform="translate(625 200)"
+          >
+            <circle class="topology-node-pulse" r="34"/>
+            <g class="topology-device-icon">
+              <rect class="device-surface" x="-27" y="-16" width="54" height="32" rx="4"/>
+              <rect x="-19" y="-6" width="7" height="7" rx="1"/>
+              <rect x="-8" y="-6" width="7" height="7" rx="1"/>
+              <rect x="3" y="-6" width="7" height="7" rx="1"/>
+              <rect x="14" y="-6" width="7" height="7" rx="1"/>
+              <path d="M-18 8h36"/>
+            </g>
+            <text class="topology-node-label" y="54" text-anchor="middle">SWITCH</text>
+          </g>
+
+          <g
+            class="topology-node"
+            data-topology-node="server"
+            data-x="90"
+            data-y="520"
+            transform="translate(90 520)"
+          >
+            <circle class="topology-node-pulse" r="34"/>
+            <g class="topology-device-icon">
+              <rect class="device-surface" x="-18" y="-26" width="36" height="52" rx="3"/>
+              <path d="M-18-9h36M-18 9h36"/>
+              <circle class="device-led" cx="10" cy="-17" r="2.2"/>
+              <circle class="device-led" cx="10" r="2.2"/>
+              <circle class="device-led" cx="10" cy="17" r="2.2"/>
+              <path d="M-10-17h9M-10 0h9M-10 17h9"/>
+            </g>
+            <text class="topology-node-label" y="54" text-anchor="middle">SERVER</text>
+          </g>
+
+          <g
+            class="topology-node"
+            data-topology-node="nas"
+            data-x="360"
+            data-y="625"
+            transform="translate(360 625)"
+          >
+            <circle class="topology-node-pulse" r="34"/>
+            <g class="topology-device-icon">
+              <rect class="device-surface" x="-27" y="-21" width="54" height="42" rx="5"/>
+              <rect x="-18" y="-13" width="14" height="26" rx="2"/>
+              <rect x="4" y="-13" width="14" height="26" rx="2"/>
+              <circle class="device-led" cx="-11" cy="7" r="2"/>
+              <circle class="device-led" cx="11" cy="7" r="2"/>
+            </g>
+            <text class="topology-node-label" y="54" text-anchor="middle">NAS</text>
+          </g>
+
+          <g
+            class="topology-node"
+            data-topology-node="access-point"
+            data-x="630"
+            data-y="520"
+            transform="translate(630 520)"
+          >
+            <circle class="topology-node-pulse" r="34"/>
+            <g class="topology-device-icon topology-access-point-icon">
+              <path d="M-26-5Q0-29 26-5M-17 5Q0-11 17 5M-8 15Q0 7 8 15"/>
+              <circle class="device-led" cy="21" r="3.2"/>
+            </g>
+            <text class="topology-node-label" y="54" text-anchor="middle">ACCESS POINT</text>
+          </g>
+
+          <g
+            class="topology-eye"
+            data-tracking-eye
+            data-eye-range="14"
+            data-eye-reference-viewport="720"
+            data-eye-y-ratio=".62"
+          >
+            <path
+              class="topology-eye-shell"
+              d="M260 360c32-42 65-62 100-62s68 20 100 62c-32 42-65 62-100 62s-68-20-100-62Z"
+            />
+            <path class="topology-eye-inner" d="M285 360c24-26 49-39 75-39s51 13 75 39c-24 26-49 39-75 39s-51-13-75-39Z"/>
+            <g class="topology-eye-iris" data-eye-iris>
+              <circle class="topology-eye-pupil" cx="360" cy="360" r="29"/>
+              <circle class="topology-eye-core" cx="360" cy="360" r="9"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="focus-copy">
+        <p class="eyebrow" data-reveal>Ein klares Sicherheitsprinzip</p>
+        <h2 id="focus-title" data-reveal>Beobachten.<br>Nicht eingreifen.</h2>
+        <p data-reveal>
+          All Seeing Eye ist als Analysewerkzeug gedacht. Das System liest
+          Informationen aus und unterstützt bei ihrer Bewertung – Änderungen
+          an der Infrastruktur bleiben bewusst außerhalb des Projektumfangs.
+        </p>
+        <div class="focus-rule" data-reveal>
+          <span>Systemgrenze</span>
+          <strong>Analyse statt Administration</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section team" id="team" aria-labelledby="team-title">
+      <div class="section-index" data-reveal>
+        <span>03</span>
+        <span>Das Team</span>
+      </div>
+
+      <div class="section-heading team-heading">
+        <p class="eyebrow" data-reveal>Vier Perspektiven. Ein System.</p>
+        <h2 id="team-title" data-reveal>Das Team hinter All Seeing Eye.</h2>
+        <p data-reveal>
+          Entwickelt im Rahmen der Diplomarbeit 2026/27 an der
+          HTL Wien 3 Rennweg.
+        </p>
+      </div>
+
+      <div class="team-grid">
+        <article class="team-member" data-reveal>
+          <figure class="team-photo has-photo">
+            <img src="assets/team/louis-steiner.png" alt="Porträt von Louis Steiner" width="308" height="408" loading="lazy" decoding="async">
+            <span aria-hidden="true">LS</span>
+            <figcaption>01</figcaption>
+          </figure>
+          <div class="member-info">
+            <p>Projektleiter</p>
+            <h3>Louis<br>Steiner</h3>
+            <a class="member-email" href="mailto:louis.steiner@allseeingeye.dev">louis.steiner@allseeingeye.dev</a>
+          </div>
+        </article>
+
+        <article class="team-member" data-reveal>
+          <figure class="team-photo has-photo">
+            <img src="assets/team/salih-hane.png" alt="Porträt von Salih Hane" width="308" height="409" loading="lazy" decoding="async">
+            <span aria-hidden="true">SH</span>
+            <figcaption>02</figcaption>
+          </figure>
+          <div class="member-info">
+            <p>Stellvertretender Projektleiter</p>
+            <h3>Salih<br>Hane</h3>
+            <a class="member-email" href="mailto:salih.hane@allseeingeye.dev">salih.hane@allseeingeye.dev</a>
+          </div>
+        </article>
+
+        <article class="team-member" data-reveal>
+          <figure class="team-photo has-photo">
+            <img src="assets/team/martin-hristov.png" alt="Porträt von Martin Hristov" width="308" height="409" loading="lazy" decoding="async">
+            <span aria-hidden="true">MH</span>
+            <figcaption>03</figcaption>
+          </figure>
+          <div class="member-info">
+            <p>Projektteammitglied</p>
+            <h3>Martin<br>Hristov</h3>
+            <a class="member-email" href="mailto:martin.hristov@allseeingeye.dev">martin.hristov@allseeingeye.dev</a>
+          </div>
+        </article>
+
+        <article class="team-member" data-reveal>
+          <figure class="team-photo has-photo">
+            <img src="assets/team/efe-ilyas.png" alt="Porträt von Efe Ilyas" width="308" height="411" loading="lazy" decoding="async">
+            <span aria-hidden="true">EI</span>
+            <figcaption>04</figcaption>
+          </figure>
+          <div class="member-info">
+            <p>Projektteammitglied</p>
+            <h3>Efe<br>Ilyas</h3>
+            <a class="member-email" href="mailto:efe.ilyas@allseeingeye.dev">efe.ilyas@allseeingeye.dev</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact" id="kontakt" aria-labelledby="contact-title" data-network-surface>
+      <div class="contact-grid" aria-hidden="true"></div>
+      <canvas class="network-canvas contact-network" data-network-canvas data-network-density="10500" aria-hidden="true"></canvas>
+      <div class="contact-inner">
+        <p class="eyebrow" data-reveal>Kontakt &amp; Austausch</p>
+        <h2 id="contact-title" data-reveal>
+          <span class="motion-word" data-motion-depth=".55" data-motion-scale=".78">Interesse</span>
+          <span class="motion-word" data-motion-depth=".8" data-motion-scale=".78">am</span>
+          <span class="motion-word accent" data-motion-depth="1.05" data-motion-scale=".78">Projekt?</span>
+        </h2>
+        <p data-reveal>
+          Fragen, Feedback oder technischer Austausch sind willkommen.
+          Der aktuelle Entwicklungsstand ist öffentlich auf GitHub einsehbar.
+        </p>
+        <a class="button button-primary" href="https://github.com/ASE-All-Seeing-Eye/All-Seeing-Eye" target="_blank" rel="noreferrer" data-reveal>
+          Zum GitHub-Repository
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <a class="brand footer-brand" href="#top">
+        <svg class="brand-mark" viewBox="0 0 982 986" aria-hidden="true" data-tracking-eye data-eye-range="1.8" data-eye-y-ratio="1">
+          <defs>
+            <filter id="footer-logo-invert" color-interpolation-filters="sRGB">
+              <feColorMatrix type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0"/>
+            </filter>
+            <mask id="footer-logo-shape" maskUnits="userSpaceOnUse" x="0" y="0" width="982" height="986">
+              <rect width="982" height="986" fill="#000"/>
+              <image href="assets/ase-logo-simple.jpg" x="1" y="1" width="980" height="984" preserveAspectRatio="none" filter="url(#footer-logo-invert)"/>
+              <circle cx="491" cy="568" r="74" fill="#000"/>
+            </mask>
+            <mask id="footer-pupil-shape" maskUnits="userSpaceOnUse" x="421" y="498" width="140" height="140">
+              <rect x="421" y="498" width="140" height="140" fill="#000"/>
+              <circle cx="491" cy="568" r="42" fill="#fff"/>
+              <circle cx="468" cy="545" r="20" fill="#000"/>
+            </mask>
+            <clipPath id="footer-pupil-clip">
+              <circle cx="491" cy="568" r="73"/>
+            </clipPath>
+          </defs>
+          <rect width="982" height="986" fill="currentColor" mask="url(#footer-logo-shape)"/>
+          <g class="brand-iris" data-eye-iris clip-path="url(#footer-pupil-clip)">
+            <rect x="421" y="498" width="140" height="140" fill="currentColor" mask="url(#footer-pupil-shape)"/>
+          </g>
+        </svg>
+        <span class="brand-name">ALL SEEING <em>EYE</em></span>
+      </a>
+      <p>Network Security Analysis · Diplomarbeit 2026/27</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="#projekt">Projekt</a>
+      <a href="#team">Team</a>
+      <button type="button" data-dialog-open="impressum">IMPRESSUM</button>
+      <button type="button" data-dialog-open="datenschutz">DATENSCHUTZ</button>
+    </div>
+
+    <p class="copyright">© <span data-current-year>2026</span> All Seeing Eye</p>
+  </footer>
+
+  <dialog class="legal-dialog" id="impressum">
+    <div class="dialog-header">
+      <div>
+        <span>Rechtliches</span>
+        <h2>Impressum</h2>
+      </div>
+      <button type="button" class="dialog-close" data-dialog-close aria-label="Impressum schließen">
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+          <path d="M3 3 15 15M15 3 3 15" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="legal-content">
+      <section>
+        <h3>Medieninhaber und verantwortlich für den Inhalt</h3>
+        <p>
+          Projektteam All Seeing Eye<br>
+          Louis Steiner, Salih Hane, Martin Hristov und Efe Ilyas
+        </p>
+      </section>
+      <section>
+        <h3>Projektanschrift</h3>
+        <p>
+          HTL Wien 3 Rennweg<br>
+          Rennweg 89b<br>
+          1030 Wien, Österreich
+        </p>
+      </section>
+      <section>
+        <h3>Kontakt</h3>
+        <ul class="legal-contact-list">
+          <li>
+            <span>Louis Steiner</span>
+            <a href="mailto:louis.steiner@allseeingeye.dev">louis.steiner@allseeingeye.dev</a>
+          </li>
+          <li>
+            <span>Salih Hane</span>
+            <a href="mailto:salih.hane@allseeingeye.dev">salih.hane@allseeingeye.dev</a>
+          </li>
+          <li>
+            <span>Martin Hristov</span>
+            <a href="mailto:martin.hristov@allseeingeye.dev">martin.hristov@allseeingeye.dev</a>
+          </li>
+          <li>
+            <span>Efe Ilyas</span>
+            <a href="mailto:efe.ilyas@allseeingeye.dev">efe.ilyas@allseeingeye.dev</a>
+          </li>
+        </ul>
+        <p class="legal-repository">
+          <span>GitHub</span>
+          <a href="https://github.com/ASE-All-Seeing-Eye/All-Seeing-Eye" target="_blank" rel="noreferrer">github.com/ASE-All-Seeing-Eye/All-Seeing-Eye</a>
+        </p>
+      </section>
+      <section>
+        <h3>Hinweis</h3>
+        <p>
+          Diese Website begleitet eine schulische Diplomarbeit. Sie ist kein
+          offizieller Webauftritt der HTL Wien 3 Rennweg.
+        </p>
+      </section>
+    </div>
+  </dialog>
+
+  <dialog class="legal-dialog" id="datenschutz">
+    <div class="dialog-header">
+      <div>
+        <span>Rechtliches</span>
+        <h2>Datenschutz</h2>
+      </div>
+      <button type="button" class="dialog-close" data-dialog-close aria-label="Datenschutz schließen">
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+          <path d="M3 3 15 15M15 3 3 15" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="legal-content">
+      <section>
+        <h3>Keine Datenerfassung</h3>
+        <p>
+          Diese statische Website verwendet keine Cookies, kein Tracking,
+          keine Analysedienste und kein Kontaktformular.
+        </p>
+      </section>
+      <section>
+        <h3>Externe Links</h3>
+        <p>
+          Beim Aufruf verlinkter GitHub-Seiten gelten die
+          Datenschutzbestimmungen des jeweiligen Anbieters.
+        </p>
+      </section>
+    </div>
+  </dialog>
+
+  <noscript>
+    <div class="noscript-note">
+      Die Inhalte sind vollständig verfügbar. Für Animationen und das mobile Menü wird JavaScript benötigt.
+    </div>
+  </noscript>
+</body>
+</html>
