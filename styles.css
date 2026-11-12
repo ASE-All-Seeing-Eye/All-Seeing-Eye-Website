@@ -1284,7 +1284,7 @@ body.menu-open .site-header .brand-name {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  filter: grayscale(1) contrast(1.03);
+  filter: contrast(1.03);
   transition: opacity .35s ease, filter .5s ease, scale .7s var(--ease-out);
 }
 
@@ -1293,7 +1293,7 @@ body.menu-open .site-header .brand-name {
 }
 
 .team-member:hover .team-photo.has-photo img {
-  filter: grayscale(.25) contrast(1.03);
+  filter: saturate(1.15) contrast(1.06);
   scale: 1.025;
 }
 

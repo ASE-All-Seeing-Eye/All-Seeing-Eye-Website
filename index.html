@@ -90,7 +90,7 @@
           <span class="hero-word motion-word accent" data-word="EYE" data-motion-depth="1.05">EYE</span>
         </h1>
 
-        <p class="hero-statement">Netzwerke verstehen.<br>Risiken sichtbar machen.</p>
+        <p class="hero-statement">Konfigurationen analysieren. <br>Risiken minimieren.</p>
         <p class="hero-description">
           Ein System zur automatisierten Erfassung, Aufbereitung und
           sicherheitsorientierten Analyse von Netzwerk-Konfigurationen.
@@ -290,8 +290,8 @@
             <path data-topology-link="firewall" d="M360 360 360 80"/>
             <path data-topology-link="router" d="M360 360 95 200"/>
             <path data-topology-link="switch" d="M360 360 625 200"/>
-            <path data-topology-link="server" d="M360 360 90 520"/>
-            <path data-topology-link="nas" d="M360 360 360 625"/>
+            <path data-topology-link="datacenter-switch" d="M360 360 90 520"/>
+            <path data-topology-link="l3-switch" d="M360 360 360 625"/>
             <path data-topology-link="access-point" d="M360 360 630 520"/>
           </g>
 
@@ -359,39 +359,36 @@
 
           <g
             class="topology-node"
-            data-topology-node="server"
+            data-topology-node="datacenter-switch"
             data-x="90"
             data-y="520"
             transform="translate(90 520)"
           >
             <circle class="topology-node-pulse" r="34"/>
             <g class="topology-device-icon">
-              <rect class="device-surface" x="-18" y="-26" width="36" height="52" rx="3"/>
-              <path d="M-18-9h36M-18 9h36"/>
-              <circle class="device-led" cx="10" cy="-17" r="2.2"/>
-              <circle class="device-led" cx="10" r="2.2"/>
-              <circle class="device-led" cx="10" cy="17" r="2.2"/>
-              <path d="M-10-17h9M-10 0h9M-10 17h9"/>
+              <rect class="device-surface" x="-27" y="-22" width="54" height="18" rx="3"/>
+              <rect class="device-surface" x="-27" y="4" width="54" height="18" rx="3"/>
+              <path d="M-20-13h5M-11-13h5M-2-13h5M7-13h5M-20 13h5M-11 13h5M-2 13h5M7 13h5"/>
+              <circle class="device-led" cx="20" cy="-13" r="2"/>
+              <circle class="device-led" cx="20" cy="13" r="2"/>
             </g>
-            <text class="topology-node-label" y="54" text-anchor="middle">SERVER</text>
+            <text class="topology-node-label" y="54" text-anchor="middle">DATACENTER<tspan x="0" dy="13">SWITCH</tspan></text>
           </g>
 
           <g
             class="topology-node"
-            data-topology-node="nas"
+            data-topology-node="l3-switch"
             data-x="360"
             data-y="625"
             transform="translate(360 625)"
           >
             <circle class="topology-node-pulse" r="34"/>
             <g class="topology-device-icon">
-              <rect class="device-surface" x="-27" y="-21" width="54" height="42" rx="5"/>
-              <rect x="-18" y="-13" width="14" height="26" rx="2"/>
-              <rect x="4" y="-13" width="14" height="26" rx="2"/>
-              <circle class="device-led" cx="-11" cy="7" r="2"/>
-              <circle class="device-led" cx="11" cy="7" r="2"/>
+              <rect class="device-surface" x="-27" y="-17" width="54" height="34" rx="4"/>
+              <path d="M-17-9 17 9M-17 9 17-9"/>
+              <path d="M-17-9h6M-17-9v5M17 9h-6M17 9v-5M-17 9h6M-17 9v-5M17-9h-6M17-9v5"/>
             </g>
-            <text class="topology-node-label" y="54" text-anchor="middle">NAS</text>
+            <text class="topology-node-label" y="54" text-anchor="middle">L3 SWITCH</text>
           </g>
 
           <g
